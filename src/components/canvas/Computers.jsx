@@ -9,17 +9,21 @@ const Computers = () => {
   const computerRef = useRef();
 
   useFrame(() => {
-    computerRef.current.rotation.y += .005;
+    // swings the object like a pendulum.
+    computerRef.current.rotation.y = (Math.sin(Date.now() * 0.0005) * Math.PI * 0.5) + 1.6 //helps with the orientation of the object;
   });
 
   return (
     <mesh ref={computerRef}>
       <hemisphereLight intensity={0.25} groundColor="black" />
-      <pointLight intensity={1} />
+      <pointLight intensity={2} position={[0, -1, 0]}/>
+      <spotLight 
+        position={[-20, 50, 10]}
+      />
       <primitive 
         object={computer.scene}
-        scale={2}
-        position={[0, -3.5, -0]}
+        scale={2.8}
+        position={[0, -2.5, 0]}
         rotation={[0, -0.25, 0]}
       />
     </mesh>
